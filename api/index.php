@@ -2,6 +2,9 @@
 $spreadsheetId = '1ygOrIsULzQ_kqcHOrE9fQy02aif4Q44Q_G_FXmkqZFQ';
 $sheetName = 'Dados';
 
+// Defina uma URL de webhook como parâmetro na solicitação
+$webhookUrl = $_GET['https://botteste-theta.vercel.app/api'] ?? '';
+
 function getDataFromSheet() {
   $data = file_get_contents("https://docs.google.com/spreadsheets/u/1/d/$spreadsheetId/gviz/tq?tqx=out:csv&sheet=$sheetName");
   $lines = explode(PHP_EOL, $data);
@@ -64,9 +67,10 @@ if (isset($update['message'])) {
   $response = "Desculpe, ocorreu um erro no processamento da mensagem.";
 }
 
-if ($chatId) {
-  $sendMessageUrl = "https://api.telegram.org/bot$token/sendMessage?chat_id=$chatId&text=" . urlencode($response);
-  file_get_contents($sendMessageUrl);
+if ($chatId && $webhookUrl) {
+  // Envia a resposta para a URL do webhook
+  $responseUrl = $webhookUrl . "?text=" . urlencode($response);
+  file_get_contents($responseUrl);
 }
 
 function joinGroup($groupLink, $chatId) {
