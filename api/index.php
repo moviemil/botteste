@@ -1,6 +1,4 @@
 <?php
-$token = '6484719892:AAEpIPKCVVxY8t55Pr-T5RxEBbIGnWPQvN8';
-$apiUrl = "https://api.telegram.org/bot$token";
 $spreadsheetId = '1ygOrIsULzQ_kqcHOrE9fQy02aif4Q44Q_G_FXmkqZFQ';
 $sheetName = 'Dados';
 
@@ -67,7 +65,7 @@ if (isset($update['message'])) {
 }
 
 if ($chatId) {
-  $sendMessageUrl = $apiUrl . "/sendMessage?chat_id=$chatId&text=" . urlencode($response);
+  $sendMessageUrl = "https://api.telegram.org/bot$token/sendMessage?chat_id=$chatId&text=" . urlencode($response);
   file_get_contents($sendMessageUrl);
 }
 
@@ -79,7 +77,7 @@ function joinGroup($groupLink, $chatId) {
   }
 
   if ($chatId) {
-    $inviteUrl = $apiUrl . "/inviteChat?chat_id=$chatId&invite_link=$groupLink";
+    $inviteUrl = "https://api.telegram.org/bot$token/inviteChat?chat_id=$chatId&invite_link=$groupLink";
     $result = file_get_contents($inviteUrl);
 
     if ($result === 'true') {
@@ -93,3 +91,4 @@ function joinGroup($groupLink, $chatId) {
 
   return $response;
 }
+?>
