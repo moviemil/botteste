@@ -1,6 +1,6 @@
 <?php
 $token = '6484719892:AAEpIPKCVVxY8t55Pr-T5RxEBbIGnWPQvN8';
-$apiUrl = "https://api.telegram.org/bot$token";
+$apiUrl = "https://api.telegram.org/bot$token/setWebhook?url=botteste-theta.vercel.app/api";
 $spreadsheetId = '1ygOrIsULzQ_kqcHOrE9fQy02aif4Q44Q_G_FXmkqZFQ';
 $sheetName = 'Dados';
 
